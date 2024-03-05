@@ -1,0 +1,63 @@
+[
+  {
+    "model": "gpts.owner",
+    "pk": 1,
+    "fields": {
+      "id": 1,
+      "slug": "example_owner"
+    }
+  },
+  {
+    "model": "gpts.activitysummary",
+    "pk": 1,
+    "fields": {
+      "id": 1,
+      "generatedDate": "2024-01-01T00:00:00Z",
+      "owner": 1
+    }
+  },
+  {
+    "model": "gpts.tags",
+    "pk": 1,
+    "fields": {
+      "id": 1,
+      "name": "example_tag"
+    }
+  },
+  {
+    "model": "gpts.modelstats",
+    "pk": 1,
+    "fields": {
+      "name": "example_stat",
+      "value": 123
+    }
+  },
+  {
+    "model": "gpts.timeseriespoint",
+    "pk": 1,
+    "fields": {
+      "date": "2024-01-01T00:00:00Z",
+      "count": 100
+    }
+  },
+  {
+    "model": "gpts.category",
+    "pk": 1,
+    "fields": {
+      "type": "example_category"
+    }
+  },
+  {
+    "model": "gpts.gpt",
+    "pk": 1,
+    "fields": {
+      "id": 1,
+      "slug": "example_gpt",
+      "owner": 1,
+      "description": "example_description",
+      "activitySummary": 1,
+      "categories": 1,
+      "frameworks": "example_framework"
+    }
+  }
+]

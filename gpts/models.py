@@ -1,42 +1,39 @@
 from django.db import models
 
-class ActivitySummary(models.Model):
+class Owner(models.Model):
     id = models.IntegerField(primary_key=True)
-    generated_date = models.DateTimeField()
+    slug = models.CharField(max_length=255)
 
-class ModelStat(models.Model):
+class ModelStats(models.Model):
     name = models.CharField(max_length=255)
     value = models.IntegerField()
 
-class Point(models.Model):
+class TimeSeriesPoint(models.Model):
     date = models.DateTimeField()
     count = models.IntegerField()
 
-class Tag(models.Model):
+class Tags(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
 
 class Category(models.Model):
-    name = models.CharField(max_length=255)
-    full_path = models.CharField(max_length=255)
-    listing_url = models.CharField(max_length=255)
+    tags = models.ManyToManyField(Tags)
+    type = models.CharField(max_length=255)
+
+class ActivitySummary(models.Model):
+    id = models.IntegerField(primary_key=True)
+    generatedDate = models.DateTimeField()
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True)
+    modelStats = models.ManyToManyField(ModelStats)
+    downloads = models.ManyToManyField(TimeSeriesPoint, related_name='downloads')
+    views = models.ManyToManyField(TimeSeriesPoint, related_name='views')
+    tags = models.ForeignKey(Tags, on_delete=models.CASCADE, null=True)
 
 class GPT(models.Model):
+    id = models.IntegerField(primary_key=True)
     slug = models.CharField(max_length=255)
-    owner = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
     description = models.TextField()
-    activity_summary = models.OneToOneField(ActivitySummary, on_delete=models.CASCADE)
-    model_stats = models.ManyToManyField(ModelStat)
-    time_series = models.JSONField()
-    downloads = models.JSONField()
-    title = models.CharField(max_length=255)
-    points = models.ManyToManyField(Point)
-    views = models.JSONField()
-    categories = models.JSONField()
-    tags = models.ManyToManyField(Tag)
-    dataset_count = models.IntegerField()
-    competition_count = models.IntegerField()
-    notebook_count = models.IntegerField()
-    display_name = models.CharField(max_length=255)
-    model_count = models.IntegerField()
-    type = models.CharField(max_length=255)
-    frameworks = models.JSONField()
+    activitySummary = models.OneToOneField(ActivitySummary, on_delete=models.CASCADE)
+    categories = models.OneToOneField(Category, on_delete=models.CASCADE)
+    frameworks = models.CharField(max_length=255)  # Assuming only one framework for simplicity
