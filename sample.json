@@ -1,63 +1,64 @@
 [
-  {
-    "model": "gpts.owner",
-    "pk": 1,
-    "fields": {
-      "id": 1,
-      "slug": "example_owner"
+    {
+      "model": "gpts.owner",
+      "pk": 9,
+      "fields": {
+        "slug": "owner9_slug"
+      }
+    },
+    {
+      "model": "gpts.modelstats",
+      "pk": 9,
+      "fields": {
+        "name": "stat9",
+        "value": 90
+      }
+    },
+    {
+      "model": "gpts.timeseriespoint",
+      "pk": 9,
+      "fields": {
+        "date": "9093-03-05T08:00:00Z",
+        "count": 90
+      }
+    },
+    {
+      "model": "gpts.tags",
+      "pk": 9,
+      "fields": {
+        "name": "tag9"
+      }
+    },
+    {
+      "model": "gpts.category",
+      "pk": 9,
+      "fields": {
+        "name": "category9",
+        "type": "type9"
+      }
+    },
+    {
+      "model": "gpts.activitysummary",
+      "pk": 9,
+      "fields": {
+        "generatedDate": "9093-03-05T08:00:00Z",
+        "owner": 9,
+        "tags": 9
+      }
+    },
+    {
+      "model": "gpts.gpt",
+      "pk": 9,
+      "fields": {
+        "slug": "gpt9_slug",
+        "owner": 9,
+        "description": "Description of GPT 9",
+        "activitySummary": 9,
+        "categories": 9,
+        "frameworks": "TensorFlow",
+        "featured": true,
+        "tryitout_link": "https://example.com"
+      }
     }
-  },
-  {
-    "model": "gpts.activitysummary",
-    "pk": 1,
-    "fields": {
-      "id": 1,
-      "generatedDate": "2024-01-01T00:00:00Z",
-      "owner": 1
-    }
-  },
-  {
-    "model": "gpts.tags",
-    "pk": 1,
-    "fields": {
-      "id": 1,
-      "name": "example_tag"
-    }
-  },
-  {
-    "model": "gpts.modelstats",
-    "pk": 1,
-    "fields": {
-      "name": "example_stat",
-      "value": 123
-    }
-  },
-  {
-    "model": "gpts.timeseriespoint",
-    "pk": 1,
-    "fields": {
-      "date": "2024-01-01T00:00:00Z",
-      "count": 100
-    }
-  },
-  {
-    "model": "gpts.category",
-    "pk": 1,
-    "fields": {
-      "type": "example_category"
-    }
-  },
-  {
-    "model": "gpts.gpt",
-    "pk": 1,
-    "fields": {
-      "id": 1,
-      "slug": "example_gpt",
-      "owner": 1,
-      "description": "example_description",
-      "activitySummary": 1,
-      "categories": 1,
-      "frameworks": "example_framework"
-    }
-  }
-]
+  ]
+  

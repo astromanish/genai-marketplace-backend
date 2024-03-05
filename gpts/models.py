@@ -1,7 +1,7 @@
 from django.db import models
 
 class Owner(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     slug = models.CharField(max_length=255)
 
 class ModelStats(models.Model):
@@ -13,27 +13,21 @@ class TimeSeriesPoint(models.Model):
     count = models.IntegerField()
 
 class Tags(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
 
-class Category(models.Model):
-    tags = models.ManyToManyField(Tags)
-    type = models.CharField(max_length=255)
+class GPT(models.Model):
+    id = models.AutoField(primary_key=True)
+    slug = models.CharField(max_length=255)  # Unique identifier for GPT instance
+    generated_date = models.DateTimeField()  # Date when the GPT instance was generated
+    description = models.TextField()  # Description of the GPT instance
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)  # Owner of the GPT instance
+    tags = models.ForeignKey(Tags, on_delete=models.CASCADE, null=True)  # Tags associated with the GPT instance
+    frameworks = models.CharField(max_length=255)  # Assuming only one framework for simplicity
+    featured = models.BooleanField(default=False)  # Whether the GPT instance is featured or not
+    tryitout_link = models.CharField(max_length=255, default="")  # Link for trying out the GPT instance
 
 class ActivitySummary(models.Model):
-    id = models.IntegerField(primary_key=True)
-    generatedDate = models.DateTimeField()
-    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True)
-    modelStats = models.ManyToManyField(ModelStats)
-    downloads = models.ManyToManyField(TimeSeriesPoint, related_name='downloads')
+    id = models.AutoField(primary_key=True)
+    upvotes = models.ManyToManyField(TimeSeriesPoint, related_name='upvotes')
     views = models.ManyToManyField(TimeSeriesPoint, related_name='views')
-    tags = models.ForeignKey(Tags, on_delete=models.CASCADE, null=True)
-
-class GPT(models.Model):
-    id = models.IntegerField(primary_key=True)
-    slug = models.CharField(max_length=255)
-    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
-    description = models.TextField()
-    activitySummary = models.OneToOneField(ActivitySummary, on_delete=models.CASCADE)
-    categories = models.OneToOneField(Category, on_delete=models.CASCADE)
-    frameworks = models.CharField(max_length=255)  # Assuming only one framework for simplicity
