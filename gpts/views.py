@@ -1,11 +1,16 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from .models import GPT, TimeSeriesPoint
+from django.views.decorators.csrf import csrf_exempt
+import datetime
+import pytz
 
+@csrf_exempt
 def get_models(request):
     models = GPT.objects.all().values('id', 'slug')
     return JsonResponse(list(models), safe=False)
 
+@csrf_exempt
 def get_model_details(request, id):
     model = get_object_or_404(GPT, id=id)
     context = {
@@ -22,12 +27,22 @@ def get_model_details(request, id):
     }
     return JsonResponse(context, safe=False)
 
+@csrf_exempt
 def update_download(request, id):
     model = get_object_or_404(GPT, id=id)
-    model.activitySummary.downloads.add(TimeSeriesPoint.objects.create(date=timezone.now(), count=1))
+    current_date = datetime.datetime.now(pytz.utc).date()
+    time_series_point, created = model.activitySummary.downloads.get_or_create(date=current_date, defaults={'count': 0})
+    if not created:
+        time_series_point.count += 1
+        time_series_point.save()
     return JsonResponse({'message': 'Download count updated successfully'})
 
+@csrf_exempt
 def update_view(request, id):
     model = get_object_or_404(GPT, id=id)
-    model.activitySummary.views.add(TimeSeriesPoint.objects.create(date=timezone.now(), count=1))
+    current_date = datetime.datetime.now(pytz.utc).date()
+    time_series_point, created = model.activitySummary.views.get_or_create(date=current_date, defaults={'count': 0})
+    if not created:
+        time_series_point.count += 1
+        time_series_point.save()
     return JsonResponse({'message': 'View count updated successfully'})
