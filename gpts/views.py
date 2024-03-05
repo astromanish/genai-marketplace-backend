@@ -31,7 +31,7 @@ def get_model_details(request, id):
 def update_download(request, id):
     model = get_object_or_404(GPT, id=id)
     current_date = datetime.datetime.now(pytz.utc).date()
-    time_series_point, created = model.activitySummary.downloads.get_or_create(date=current_date, defaults={'count': 0})
+    time_series_point, created = model.activitySummary.downloads.get_or_create(date=current_date, defaults={'count': 1})
     if not created:
         time_series_point.count += 1
         time_series_point.save()
@@ -41,7 +41,7 @@ def update_download(request, id):
 def update_view(request, id):
     model = get_object_or_404(GPT, id=id)
     current_date = datetime.datetime.now(pytz.utc).date()
-    time_series_point, created = model.activitySummary.views.get_or_create(date=current_date, defaults={'count': 0})
+    time_series_point, created = model.activitySummary.views.get_or_create(date=current_date, defaults={'count': 1})
     if not created:
         time_series_point.count += 1
         time_series_point.save()
