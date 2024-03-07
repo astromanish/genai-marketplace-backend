@@ -10,7 +10,7 @@ from django.db import transaction
 
 @csrf_exempt
 def get_models(request):
-    models = GPT.objects.all().values('id', 'slug', 'description', 'featured','tryitout_link', 'frameworks', 'tags__name')
+    models = GPT.objects.all().values('id', 'slug', 'description', 'featured','tryitout_link', 'frameworks', 'tags__name', 'total_upvote', 'total_view')
     return JsonResponse(list(models), safe=False)
 
 @csrf_exempt
@@ -27,6 +27,8 @@ def get_model_details(request, id):
         'frameworks': model.frameworks,
         'upvotes': [{'date': point.date, 'count': point.count} for point in model.activity_summary.upvotes.all()],
         'views': [{'date': point.date, 'count': point.count} for point in model.activity_summary.views.all()],
+        'total_upvote': model.total_upvote,
+        'total_view': model.total_view,
         'featured': model.featured,
         'tryitout_link': model.tryitout_link
     }
@@ -40,6 +42,8 @@ def update_upvote(request, id):
     if not created:
         time_series_point.count += 1
         time_series_point.save()
+    model.total_upvote += 1  # Update total_upvote field
+    model.save()  # Save the model
     return JsonResponse({'message': 'Upvote count updated successfully'})
 
 @csrf_exempt
@@ -50,6 +54,8 @@ def update_view(request, id):
     if not created:
         time_series_point.count += 1
         time_series_point.save()
+    model.total_view += 1  # Update total_view field
+    model.save()  # Save the model
     return JsonResponse({'message': 'View count updated successfully'})
 
 @csrf_exempt
@@ -99,6 +105,8 @@ def add_gpt_model(request):
                     'generated_date': model.generated_date,  
                     'tags': [tag.name for tag in model.tags.all()] if model.tags else None,
                     'frameworks': model.frameworks,
+                    'total_upvote': model.total_upvote,
+                    'total_view': model.total_view,
                     'featured': model.featured,
                     'tryitout_link': model.tryitout_link
                 } 
@@ -108,4 +116,3 @@ def add_gpt_model(request):
 
             # Return JsonResponse with serializer errors if GPT creation fails
             return JsonResponse({'errors': [serializer.errors]}, status=400)
-

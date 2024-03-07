@@ -28,3 +28,5 @@ class GPT(models.Model):
     featured = models.BooleanField(default=False)  # Whether the GPT instance is featured or not
     tryitout_link = models.CharField(max_length=255, default="")  # Link for trying out the GPT instance
     activity_summary = models.ForeignKey(ActivitySummary, on_delete=models.CASCADE, null=True, default=None)  # Relationship with ActivitySummary
+    total_view = models.IntegerField(default=0)  # Total views of the GPT instance
+    total_upvote = models.IntegerField(default=0)  # Total upvotes of the GPT instance
