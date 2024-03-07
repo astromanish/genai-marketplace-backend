@@ -5,6 +5,8 @@ from .serializers import GPTSerializer
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 import pytz
+import json
+from django.db import transaction
 
 @csrf_exempt
 def get_models(request):
@@ -21,7 +23,7 @@ def get_model_details(request, id):
         'owner_slug': model.owner.slug if model.owner else None,
         'description': model.description,
         'generated_date': model.generated_date,
-        'tags': [model.tags.name] if model.tags else None,
+        'tags': [tag.name for tag in model.tags.all()] if model.tags else None,
         'frameworks': model.frameworks,
         'upvotes': [{'date': point.date, 'count': point.count} for point in model.activity_summary.upvotes.all()],
         'views': [{'date': point.date, 'count': point.count} for point in model.activity_summary.views.all()],
@@ -52,52 +54,58 @@ def update_view(request, id):
 
 @csrf_exempt
 def add_gpt_model(request):
-    current_date = datetime.datetime.now(pytz.utc).date()
     if request.method == 'POST':
-        
-        data = request.POST.copy()
+        # Decode the request body from bytes to string
+        body = request.body.decode('utf-8')
 
-        activitySummary = ActivitySummary.objects.create()
-        activitySummary.views.create(date=current_date, count=1)
-        activitySummary.upvotes.create(date=current_date, count=1)
+        # Parse the string as JSON
+        data = json.loads(body)
 
-        owner_id = data.get('owner_id')
-        owner = Owner.objects.get(id=owner_id) if owner_id else None
-
-        tag_ids = data.getlist('tag_ids')
-        tags = Tags.objects.filter(id__in=tag_ids)
-
+        # Using dictionary comprehension to filter out None values
         gpt_data = {
             'slug': data.get('slug', ''),
-            'owner': owner,  
+            'owner': data.get('owner_id'),
             'description': data.get('description', ''),
-            'generated_date': current_date,  # Change to 'generated_date' to match model field name
-            'activitySummary': activitySummary,
-            'tags': tags,  
+            'generated_date': data.get('generated_date'),  
+            'tags': data.get('tags', []),
             'frameworks': data.get('frameworks'),
             'featured': data.get('featured', False),
             'tryitout_link': data.get('tryitout_link', ''),
         }
-        
-        serializer = GPTSerializer(data=gpt_data)
-        
-        if serializer.is_valid():
-            instance = serializer.save()
-            model = get_object_or_404(GPT, id=instance.id)  
-            data = {
-                'id': model.id,
-                'slug': model.slug,
-                'owner_id': model.owner.id if model.owner else None,
-                'owner_slug': model.owner.slug if model.owner else None,
-                'description': model.description,
-                'generated_date': model.generated_date,  
-                'tags': [model.tags.name] if model.tags else None,
-                'frameworks': model.frameworks,
-                'upvotes': [{'date': point.date, 'count': point.count} for point in model.activity_summary.upvotes.all()],
-                'views': [{'date': point.date, 'count': point.count} for point in model.activity_summary.views.all()],
-                'featured': model.featured,
-                'tryitout_link': model.tryitout_link
-            }
-            return JsonResponse(data, safe=False)
-        return JsonResponse(serializer.errors, status=400)
-    return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
+
+        # Using transaction.atomic() to ensure atomicity
+        with transaction.atomic():
+            # Create the GPT instance
+            serializer = GPTSerializer(data=gpt_data)
+            if serializer.is_valid():
+                model = serializer.save()
+
+                # Create ActivitySummary instance with one view and one upvote
+                activity_summary = ActivitySummary.objects.create()
+                activity_summary.views.create(date=model.generated_date, count=1)
+                activity_summary.upvotes.create(date=model.generated_date, count=1)
+
+                # Assign the activity_summary to the GPT model
+                model.activity_summary = activity_summary
+                model.save()
+
+                # Generate response data
+                data = {
+                    'id': model.id,
+                    'slug': model.slug,
+                    'owner_id': model.owner.id if model.owner else None,
+                    'owner_slug': model.owner.slug if model.owner else None,
+                    'description': model.description,
+                    'generated_date': model.generated_date,  
+                    'tags': [tag.name for tag in model.tags.all()] if model.tags else None,
+                    'frameworks': model.frameworks,
+                    'featured': model.featured,
+                    'tryitout_link': model.tryitout_link
+                } 
+
+                # Return JsonResponse with the response data
+                return JsonResponse(data, safe=False)
+
+            # Return JsonResponse with serializer errors if GPT creation fails
+            return JsonResponse({'errors': [serializer.errors]}, status=400)
+

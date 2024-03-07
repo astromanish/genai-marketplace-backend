@@ -1,7 +1,7 @@
 [
     {
       "model": "gpts.owner",
-      "pk": 1,
+      "pk": 2,
       "fields": {
         "slug": "gpt4-owner"
       }
@@ -15,24 +15,24 @@
     },
     {
       "model": "gpts.activitysummary",
-      "pk": 1,
+      "pk": 2,
       "fields": {
-        "id": 1
+        "id": 2
       }
     },
     {
       "model": "gpts.gpt",
-      "pk": 1,
+      "pk": 2,
       "fields": {
         "slug": "gpt-4",
         "generated_date": "2024-03-07T08:00:00Z",
         "description": "GPT-4 is the successor to GPT-3, an even more advanced language model developed by OpenAI.",
-        "owner": 1,
+        "owner": 2,
         "tags": 1,
         "frameworks": "PyTorch",
         "featured": true,
         "tryitout_link": "https://openai.com/gpt-4",
-        "activity_summary": 1
+        "activity_summary": 2
       }
     }
   ]
