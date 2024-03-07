@@ -10,8 +10,12 @@ from django.db import transaction
 
 @csrf_exempt
 def get_models(request):
-    models = GPT.objects.all().values('id', 'slug', 'description', 'featured','tryitout_link', 'owner', 'tags__name', 'total_upvote', 'total_view')
+    models = GPT.objects.all().values('id', 'slug', 'description', 'featured','tryitout_link', 'owner__slug', 'total_upvote', 'total_view')
+    for model in models:
+        tags = Tags.objects.filter(gpt__id=model['id']).values_list('name', flat=True)
+        model['tags'] = list(tags)
     return JsonResponse(list(models), safe=False)
+
 
 @csrf_exempt
 def get_model_details(request, id):
@@ -116,11 +120,6 @@ def add_gpt_model(request):
 
             # Return JsonResponse with serializer errors if GPT creation fails
             return JsonResponse({'errors': [serializer.errors]}, status=400)
-        
-@csrf_exempt
-def get_owner_slug(request, owner_id):
-    owner = get_object_or_404(Owner, id=owner_id)
-    return JsonResponse({'owner_slug': owner.slug})
 
 @csrf_exempt
 def get_all_tags(request):
