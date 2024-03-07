@@ -20,11 +20,11 @@ def get_model_details(request, id):
         'owner_id': model.owner.id if model.owner else None,
         'owner_slug': model.owner.slug if model.owner else None,
         'description': model.description,
-        'generated_date': model.generatedDate,
-        'tags': [tag.name for tag in model.tags.all()],
+        'generated_date': model.generated_date,
+        'tags': [model.tags.name] if model.tags else None,
         'frameworks': model.frameworks,
-        'upvotes': [{'date': point.date, 'count': point.count} for point in model.activitySummary.upvotes.all()],
-        'views': [{'date': point.date, 'count': point.count} for point in model.activitySummary.views.all()],
+        'upvotes': [{'date': point.date, 'count': point.count} for point in model.activity_summary.upvotes.all()],
+        'views': [{'date': point.date, 'count': point.count} for point in model.activity_summary.views.all()],
         'featured': model.featured,
         'tryitout_link': model.tryitout_link
     }
@@ -34,7 +34,7 @@ def get_model_details(request, id):
 def update_upvote(request, id):
     model = get_object_or_404(GPT, id=id)
     current_date = datetime.datetime.now(pytz.utc).date()
-    time_series_point, created = model.activitySummary.upvotes.get_or_create(date=current_date, defaults={'count': 1})
+    time_series_point, created = model.activity_summary.upvotes.get_or_create(date=current_date, defaults={'count': 1})
     if not created:
         time_series_point.count += 1
         time_series_point.save()
@@ -44,7 +44,7 @@ def update_upvote(request, id):
 def update_view(request, id):
     model = get_object_or_404(GPT, id=id)
     current_date = datetime.datetime.now(pytz.utc).date()
-    time_series_point, created = model.activitySummary.views.get_or_create(date=current_date, defaults={'count': 1})
+    time_series_point, created = model.activity_summary.views.get_or_create(date=current_date, defaults={'count': 1})
     if not created:
         time_series_point.count += 1
         time_series_point.save()
@@ -57,9 +57,9 @@ def add_gpt_model(request):
         
         data = request.POST.copy()
 
-        activity_summary = ActivitySummary.objects.create()
-        activity_summary.views.create(date=current_date, count=1)
-        activity_summary.upvotes.create(date=current_date, count=1)
+        activitySummary = ActivitySummary.objects.create()
+        activitySummary.views.create(date=current_date, count=1)
+        activitySummary.upvotes.create(date=current_date, count=1)
 
         owner_id = data.get('owner_id')
         owner = Owner.objects.get(id=owner_id) if owner_id else None
@@ -71,8 +71,8 @@ def add_gpt_model(request):
             'slug': data.get('slug', ''),
             'owner': owner,  
             'description': data.get('description', ''),
-            'generatedDate': current_date,  # Change to 'generatedDate' to match model field name
-            'activitySummary': activity_summary,
+            'generated_date': current_date,  # Change to 'generated_date' to match model field name
+            'activitySummary': activitySummary,
             'tags': tags,  
             'frameworks': data.get('frameworks'),
             'featured': data.get('featured', False),
@@ -83,18 +83,18 @@ def add_gpt_model(request):
         
         if serializer.is_valid():
             instance = serializer.save()
-            model = get_object_or_404(GPT, id=instance.id)  # Use instance.id to get the newly created object
+            model = get_object_or_404(GPT, id=instance.id)  
             data = {
                 'id': model.id,
                 'slug': model.slug,
                 'owner_id': model.owner.id if model.owner else None,
                 'owner_slug': model.owner.slug if model.owner else None,
                 'description': model.description,
-                'generated_date': model.generatedDate,  # Change to 'generatedDate' to match model field name
-                'tags': [tag.name for tag in model.tags.all()],
+                'generated_date': model.generated_date,  
+                'tags': [model.tags.name] if model.tags else None,
                 'frameworks': model.frameworks,
-                'upvotes': [{'date': point.date, 'count': point.count} for point in model.activitySummary.upvotes.all()],
-                'views': [{'date': point.date, 'count': point.count} for point in model.activitySummary.views.all()],
+                'upvotes': [{'date': point.date, 'count': point.count} for point in model.activity_summary.upvotes.all()],
+                'views': [{'date': point.date, 'count': point.count} for point in model.activity_summary.views.all()],
                 'featured': model.featured,
                 'tryitout_link': model.tryitout_link
             }

@@ -4,17 +4,18 @@ class Owner(models.Model):
     id = models.AutoField(primary_key=True)
     slug = models.CharField(max_length=255)
 
-class ModelStats(models.Model):
-    name = models.CharField(max_length=255)
-    value = models.IntegerField()
-
-class TimeSeriesPoint(models.Model):
-    date = models.DateTimeField()
-    count = models.IntegerField()
-
 class Tags(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    
+class TimeSeriesPoint(models.Model):
+    date = models.DateTimeField()
+    count = models.IntegerField()
+    
+class ActivitySummary(models.Model):
+    id = models.AutoField(primary_key=True)
+    upvotes = models.ManyToManyField(TimeSeriesPoint, related_name='upvotes')
+    views = models.ManyToManyField(TimeSeriesPoint, related_name='views')
 
 class GPT(models.Model):
     id = models.AutoField(primary_key=True)
@@ -26,8 +27,4 @@ class GPT(models.Model):
     frameworks = models.CharField(max_length=255)  # Assuming only one framework for simplicity
     featured = models.BooleanField(default=False)  # Whether the GPT instance is featured or not
     tryitout_link = models.CharField(max_length=255, default="")  # Link for trying out the GPT instance
-
-class ActivitySummary(models.Model):
-    id = models.AutoField(primary_key=True)
-    upvotes = models.ManyToManyField(TimeSeriesPoint, related_name='upvotes')
-    views = models.ManyToManyField(TimeSeriesPoint, related_name='views')
+    activity_summary = models.ForeignKey(ActivitySummary, on_delete=models.CASCADE)  # Relationship with ActivitySummary
