@@ -126,4 +126,9 @@ def get_all_tags(request):
     tags = Tags.objects.all().values_list('name', flat=True)
     return JsonResponse({'tags': list(tags)})
 
+@csrf_exempt
+def get_all_owners(request):
+    owners = Owner.objects.all().values_list('slug', flat=True)
+    return JsonResponse({'owners': list(owners)})
+
 

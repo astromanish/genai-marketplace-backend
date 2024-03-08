@@ -8,4 +8,5 @@ urlpatterns = [
     path('model/<int:id>/view', views.update_view, name='update_view'),
     path('model/add', views.add_gpt_model, name='add_gpt_model'),  # New API endpoint to add a new GPT model
     path('tags', views.get_all_tags, name='get_all_tags'),  # New API endpoint to get all available tags
+    path('owners', views.get_all_owners, name='get_all_owners'),  # New API endpoint to get all available tags
 ]
