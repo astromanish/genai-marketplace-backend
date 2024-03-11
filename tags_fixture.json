@@ -1,0 +1,72 @@
+[
+    {
+        "model": "gpts.tags",
+        "pk": 1,
+        "fields": {
+            "name": "AI"
+        }
+    },
+    {
+        "model": "gpts.tags",
+        "pk": 2,
+        "fields": {
+            "name": "Machine Learning"
+        }
+    },
+    {
+        "model": "gpts.tags",
+        "pk": 3,
+        "fields": {
+            "name": "Natural Language Processing"
+        }
+    },
+    {
+        "model": "gpts.tags",
+        "pk": 4,
+        "fields": {
+            "name": "Deep Learning"
+        }
+    },
+    {
+        "model": "gpts.tags",
+        "pk": 5,
+        "fields": {
+            "name": "Chatbot"
+        }
+    },
+    {
+        "model": "gpts.tags",
+        "pk": 6,
+        "fields": {
+            "name": "Virtual Assistant"
+        }
+    },
+    {
+        "model": "gpts.tags",
+        "pk": 7,
+        "fields": {
+            "name": "Data Science"
+        }
+    },
+    {
+        "model": "gpts.tags",
+        "pk": 8,
+        "fields": {
+            "name": "Neural Networks"
+        }
+    },
+    {
+        "model": "gpts.tags",
+        "pk": 9,
+        "fields": {
+            "name": "Artificial Intelligence"
+        }
+    },
+    {
+        "model": "gpts.tags",
+        "pk": 10,
+        "fields": {
+            "name": "Python"
+        }
+    }
+]

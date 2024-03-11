@@ -1,0 +1,207 @@
+[
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "AlphaGo",
+            "generated_date": "2023-06-27 18:04:33",
+            "description": "\n    AlphaGo is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run AlphaGo:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 6,
+            "tags": [
+                7,
+                7
+            ],
+            "frameworks": "TensorFlow",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 4,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    },
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "OpenAI Codex",
+            "generated_date": "2024-03-07 18:04:33",
+            "description": "\n    OpenAI Codex is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run OpenAI Codex:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 4,
+            "tags": [
+                10,
+                3
+            ],
+            "frameworks": "TensorFlow",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 3,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    },
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "OpenAI Codex",
+            "generated_date": "2024-02-19 18:04:33",
+            "description": "\n    OpenAI Codex is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run OpenAI Codex:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 3,
+            "tags": [
+                1,
+                6,
+                8
+            ],
+            "frameworks": "PyTorch",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 4,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    },
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "AlphaGo",
+            "generated_date": "2023-05-23 18:04:33",
+            "description": "\n    AlphaGo is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run AlphaGo:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 6,
+            "tags": [
+                8,
+                2,
+                3
+            ],
+            "frameworks": "TensorFlow",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 3,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    },
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "GPT-2",
+            "generated_date": "2023-11-22 18:04:33",
+            "description": "\n    GPT-2 is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run GPT-2:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 9,
+            "tags": [
+                3,
+                5
+            ],
+            "frameworks": "TensorFlow",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 4,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    },
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "GPT-2",
+            "generated_date": "2023-06-12 18:04:33",
+            "description": "\n    GPT-2 is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run GPT-2:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 7,
+            "tags": [
+                3,
+                1
+            ],
+            "frameworks": "PyTorch",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 5,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    },
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "GPT-2",
+            "generated_date": "2023-06-13 18:04:33",
+            "description": "\n    GPT-2 is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run GPT-2:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 3,
+            "tags": [
+                10,
+                5,
+                9
+            ],
+            "frameworks": "TensorFlow",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 4,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    },
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "OpenAI Codex",
+            "generated_date": "2023-05-31 18:04:33",
+            "description": "\n    OpenAI Codex is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run OpenAI Codex:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 3,
+            "tags": [
+                1,
+                9
+            ],
+            "frameworks": "TensorFlow",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 5,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    },
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "OpenAI Codex",
+            "generated_date": "2023-04-15 18:04:33",
+            "description": "\n    OpenAI Codex is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run OpenAI Codex:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 4,
+            "tags": [
+                1,
+                1,
+                5
+            ],
+            "frameworks": "PyTorch",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 4,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    },
+    {
+        "model": "gpts.gpt",
+        "pk": null,
+        "fields": {
+            "slug": "OpenAI Codex",
+            "generated_date": "2023-09-04 18:04:33",
+            "description": "\n    OpenAI Codex is a popular AI model developed by its respective organization. It has been trained on a massive dataset and can perform various natural language processing tasks effectively. Below is an example code snippet to run OpenAI Codex:\n\n    \n# Import necessary libraries\nimport gpt\n\n# Load the model\nmodel = gpt.load_model(\"your_model_path\")\n\n# Generate text\nprompt = \"Your prompt here\"\noutput = model.generate_text(prompt)\n\nprint(output)\n\n    ",
+            "owner": 3,
+            "tags": [
+                5,
+                2,
+                9
+            ],
+            "frameworks": "TensorFlow",
+            "featured": false,
+            "tryitout_link": "",
+            "activity_summary": 3,
+            "total_view": 0,
+            "total_upvote": 0
+        }
+    }
+]

@@ -9,7 +9,7 @@ def create_timeseries_points(date, pk):
         "pk": pk,
         "fields": {
             "date": date.strftime("%Y-%m-%d %H:%M:%S"),
-            "count": randint(10, 60)
+            "count": randint(300, 700)
         }
     }
 
@@ -25,7 +25,7 @@ timeseries_counter = 1
 activity_summary_counter = 1
 
 # GPT model ID
-gpt_model_id = 12
+gpt_model_id = 5
 
 # Generate fixture data for views and upvotes
 for date in dates:
@@ -55,5 +55,5 @@ fixture_data.append(activity_summary_data)
 activity_summary_counter += 1
 
 # Dump fixture data to a file
-with open("view_fixture.json", "w") as f:
+with open("activity_summary_fixture.json", "w") as f:
     json.dump(fixture_data, f, indent=4)

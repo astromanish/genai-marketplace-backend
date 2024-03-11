@@ -1,0 +1,72 @@
+[
+    {
+        "model": "gpts.owner",
+        "pk": 1,
+        "fields": {
+            "slug": "Google"
+        }
+    },
+    {
+        "model": "gpts.owner",
+        "pk": 2,
+        "fields": {
+            "slug": "Apple"
+        }
+    },
+    {
+        "model": "gpts.owner",
+        "pk": 3,
+        "fields": {
+            "slug": "Facebook"
+        }
+    },
+    {
+        "model": "gpts.owner",
+        "pk": 4,
+        "fields": {
+            "slug": "Amazon"
+        }
+    },
+    {
+        "model": "gpts.owner",
+        "pk": 5,
+        "fields": {
+            "slug": "Microsoft"
+        }
+    },
+    {
+        "model": "gpts.owner",
+        "pk": 6,
+        "fields": {
+            "slug": "IBM"
+        }
+    },
+    {
+        "model": "gpts.owner",
+        "pk": 7,
+        "fields": {
+            "slug": "Oracle"
+        }
+    },
+    {
+        "model": "gpts.owner",
+        "pk": 8,
+        "fields": {
+            "slug": "Intel"
+        }
+    },
+    {
+        "model": "gpts.owner",
+        "pk": 9,
+        "fields": {
+            "slug": "Cisco"
+        }
+    },
+    {
+        "model": "gpts.owner",
+        "pk": 10,
+        "fields": {
+            "slug": "NVIDIA"
+        }
+    }
+]
