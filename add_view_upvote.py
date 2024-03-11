@@ -9,7 +9,7 @@ def create_timeseries_points(date, pk):
         "pk": pk,
         "fields": {
             "date": date.strftime("%Y-%m-%d %H:%M:%S"),
-            "count": randint(100, 500)
+            "count": randint(10, 60)
         }
     }
 
@@ -55,5 +55,5 @@ fixture_data.append(activity_summary_data)
 activity_summary_counter += 1
 
 # Dump fixture data to a file
-with open("fixture.json", "w") as f:
+with open("view_fixture.json", "w") as f:
     json.dump(fixture_data, f, indent=4)
