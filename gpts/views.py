@@ -7,6 +7,8 @@ import datetime
 import pytz
 import json
 from django.db import transaction
+from django.db.models import Sum
+
 
 @csrf_exempt
 def get_models(request):
@@ -16,10 +18,17 @@ def get_models(request):
         model['tags'] = list(tags)
     return JsonResponse(list(models), safe=False)
 
-
 @csrf_exempt
 def get_model_details(request, id):
     model = get_object_or_404(GPT, id=id)
+    
+    # Refresh total_upvote and total_view fields
+    upvotes_count = model.activity_summary.upvotes.aggregate(Sum('count'))['count__sum']
+    views_count = model.activity_summary.views.aggregate(Sum('count'))['count__sum']
+    model.total_upvote = upvotes_count if upvotes_count else 0
+    model.total_view = views_count if views_count else 0
+    model.save()
+
     context = {
         'id': model.id,
         'slug': model.slug,
@@ -46,7 +55,7 @@ def update_upvote(request, id):
     if not created:
         time_series_point.count += 1
         time_series_point.save()
-    model.total_upvote += 1  # Update total_upvote field
+    model.total_upvote += 1  
     model.save()  # Save the model
     return JsonResponse({'message': 'Upvote count updated successfully'})
 

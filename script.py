@@ -25,7 +25,7 @@ timeseries_counter = 1
 activity_summary_counter = 1
 
 # GPT model ID
-gpt_model_id = 2
+gpt_model_id = 12
 
 # Generate fixture data for views and upvotes
 for date in dates:
