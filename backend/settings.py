@@ -16,16 +16,25 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_ALL_ORIGINS = True  # Allow requests from any origin
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'defaultdb',
+#         'USER': 'avnadmin',
+#         'PASSWORD': 'AVNS_yHD1kimmIVRMOJ7NKmj',
+#         'HOST': 'pg-22db095a-astromanishsingh-bd31.a.aivencloud.com',
+#         'PORT': '20162',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'defaultdb',
-        'USER': 'avnadmin',
-        'PASSWORD': 'AVNS_yHD1kimmIVRMOJ7NKmj',
-        'HOST': 'pg-22db095a-astromanishsingh-bd31.a.aivencloud.com',
-        'PORT': '20162',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 # Application definition
 

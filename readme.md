@@ -1,4 +1,4 @@
-# Django GPTs Project
+# GPTs 
 
 This Django project manages GPT (Generative Pre-trained Transformer) instances through a single app called `gpts`. It provides APIs to interact with GPT models, allowing users to view, upvote, and add new models.
 
@@ -66,4 +66,4 @@ The API endpoints for the `gpts` app are configured as follows:
 
 ## Contributors
 
-- [Your Name](https://github.com/astromanish)
+- [Manish Singh](https://github.com/astromanish)
