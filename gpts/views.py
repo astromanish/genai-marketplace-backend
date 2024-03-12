@@ -8,6 +8,7 @@ import pytz
 import json
 from django.db import transaction
 from django.db.models import Sum
+from django.core.serializers import serialize
 
 
 @csrf_exempt
@@ -132,12 +133,14 @@ def add_gpt_model(request):
 
 @csrf_exempt
 def get_all_tags(request):
-    tags = Tags.objects.all().values_list('name', flat=True)
-    return JsonResponse({'tags': list(tags)})
+    tags = Tags.objects.all()
+    data = serialize('json', tags, fields=('id', 'name'))
+    return JsonResponse({'tags': data})
 
 @csrf_exempt
 def get_all_owners(request):
-    owners = Owner.objects.all().values_list('slug', flat=True)
-    return JsonResponse({'owners': list(owners)})
+    owners = Owner.objects.all()
+    data = serialize('json', owners, fields=('id', 'slug'))
+    return JsonResponse({'owners': data})
 
 
