@@ -53,7 +53,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    '*'
+    'http://localhost:3000',
+    'http://astroatlan.netlify.app'
 ]
 
 ROOT_URLCONF = 'backend.urls'
