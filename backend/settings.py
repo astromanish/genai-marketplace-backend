@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-b4zc^7o)_v#4_c7e8(d$s%a15(ju32pf%f3rf!g1@@11!zi8(&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_ALL_ORIGINS = True  # Allow requests from any origin
 
@@ -53,8 +53,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Your React app's URL
-    "http://astroatlan.netlify.app",  # Your Netlify app's URL
+    '*'
 ]
 
 ROOT_URLCONF = 'backend.urls'
